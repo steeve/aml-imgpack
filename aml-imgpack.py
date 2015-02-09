@@ -181,8 +181,11 @@ def unpack_image_file(logo_img_file):
 
 
 def pack_image_file(outfile, assets):
+    print "Packing files in %s:" % outfile
     img = AmlResourcesImage()
     img.items = map(AmlResItem.from_file, assets)
+    for item in img.items:
+        print "  %s (%d bytes)" % (item.name, item.size)
     with open(outfile, "w") as fp:
         fp.write(img.pack())
 
