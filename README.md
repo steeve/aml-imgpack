@@ -17,8 +17,8 @@ positional arguments:
 
 optional arguments:
   -h, --help   show this help message and exit
-  --unpack     Unpack logo.img file
-  --pack PACK  Unpack logo.img file
+  --unpack     Unpack image file
+  --pack PACK  Pack image file
 ```
 
 Listing assets in an image

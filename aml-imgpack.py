@@ -194,8 +194,8 @@ def pack_image_file(outfile, assets):
 
 def main():
     parser = argparse.ArgumentParser(description='Pack and unpack amlogic uboot images')
-    parser.add_argument("--unpack", help="Unpack logo.img file", action="store_true")
-    parser.add_argument("--pack", help="Unpack logo.img file")
+    parser.add_argument("--unpack", help="Unpack image file", action="store_true")
+    parser.add_argument("--pack", help="Pack image file")
     parser.add_argument('assets', metavar='file', type=str, nargs='+', help='an integer for the accumulator')
 
     args = parser.parse_args()
