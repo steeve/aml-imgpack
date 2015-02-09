@@ -68,18 +68,23 @@ class AmlResourcesImage(object):
 
     def pack(self):
         packed = ""
+
+        data_pack = ""
+        for item in self.items:
+            item.start = len(data_pack) + AmlResImgHead._size + (AmlResItem._size * len(self.items))
+            item.size = len(item.data)
+            data_pack += item.data
+            data_pack += struct.pack("%ds" % (len(data_pack) % self.header.alignSz), "\0" * self.header.alignSz)
+
         for i, item in enumerate(self.items):
             item.index = i
-            item.start = len(packed) + AmlResImgHead._size + AmlResItem._size
             item.dcrc = binascii.crc32(item.data) & 0xFFFFFFFF
             if i < (len(self.items) - 1):
-                item.next = item.start + item.size
-                item.next += item.next % self.header.alignSz
+                item.next = AmlResImgHead._size + (AmlResItem._size * (i + 1))
             packed += item.pack()
-            packed += struct.pack("%ds" % (len(packed) % self.header.alignSz), "\0" * self.header.alignSz)
         self.header.imgItemNum = len(self.items)
         self.header.imgSz = len(packed) + AmlResImgHead._size
-        return self.header.pack() + packed
+        return self.header.pack() + packed + data_pack
 
 
 class AmlResItem(object):
@@ -124,7 +129,7 @@ class AmlResItem(object):
     def pack(self):
         return struct.pack(self._format, self.magic, self.hcrc, self.size, \
             self.start, self.end, self.next, self.dcrc, self.index, self.nums,
-            self.type, self.comp, self.name) + self.data
+            self.type, self.comp, self.name)
 
     def __repr__(self):
         return "AmlResItem(name=%s start=0x%x size=%d)" % (self.name, self.start, self.size)
