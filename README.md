@@ -3,6 +3,13 @@ aml-imgpack
 
 Resource packer/unpacker for Amlogic Logo image files
 
+About bootup.bmp
+----------------
+
+Make sure you respect the original image sizes and depth, or else u-boot might be confused.
+
+For instance, bootup.bmp is 360x360@16bpp.
+
 Help
 ----
 
