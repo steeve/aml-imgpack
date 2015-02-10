@@ -6,9 +6,6 @@ import argparse
 import binascii
 
 
-IH_MAGIC = 0x27051956  # Image Magic Number
-IH_NMLEN = 32   # Image Name Length
-
 AML_RES_IMG_VERSION_V1 = 0x01
 AML_RES_IMG_VERSION_V2 = 0x02
 AML_RES_IMG_ITEM_ALIGN_SZ = 16
@@ -19,8 +16,8 @@ AML_RES_IMG_HEAD_SZ = AML_RES_IMG_ITEM_ALIGN_SZ * 4 # 64
 AML_RES_ITEM_HEAD_SZ = AML_RES_IMG_ITEM_ALIGN_SZ * 4 # 64
 IH_MAGIC = 0x27051956 # Image Magic Number
 IH_NMLEN = 32 # Image Name Length
-
 ARCH_ARM = 8
+
 
 # typedef struct {
 #     __u32   crc;    //crc32 value for the resouces image
