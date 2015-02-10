@@ -78,7 +78,6 @@ class AmlResourcesImage(object):
 
         for i, item in enumerate(self.items):
             item.index = i
-            item.dcrc = binascii.crc32(item.data) & 0xFFFFFFFF
             if i < (len(self.items) - 1):
                 item.next = AmlResImgHead._size + (AmlResItem._size * (i + 1))
             packed += item.pack()
@@ -109,6 +108,7 @@ class AmlResItem(object):
         item = cls()
         with open(file) as fp:
             item.data = fp.read()
+        item.dcrc = binascii.crc32(item.data) & 0xFFFFFFFF
         item.size = len(item.data)
         item.name = file.replace(".bmp", "")
         return item
