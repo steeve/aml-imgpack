@@ -88,7 +88,7 @@ class AmlResourcesImage(object):
 
 
 class AmlResItem(object):
-    _format = "IIIIIIIBBBB%ss" % IH_NMLEN
+    _format = "IIIIIIIBBBB%ds" % IH_NMLEN
     _size = struct.calcsize(_format)
     magic = IH_MAGIC
     hcrc = 0
